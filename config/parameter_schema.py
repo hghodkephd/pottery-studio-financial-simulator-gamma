@@ -352,12 +352,12 @@ NEW FORMAT:
 )
 
 MAPPING RULES:
-1. "type": "float" → type=ParameterType.FLOAT
-2. "type": "int" → type=ParameterType.INT
-3. "type": "bool" → type=ParameterType.BOOL
-4. "type": "select" → type=ParameterType.SELECT
-5. "type": "text" → type=ParameterType.TEXT
-6. "desc" → help
+1. "type": "float" â†’ type=ParameterType.FLOAT
+2. "type": "int" â†’ type=ParameterType.INT
+3. "type": "bool" â†’ type=ParameterType.BOOL
+4. "type": "select" â†’ type=ParameterType.SELECT
+5. "type": "text" â†’ type=ParameterType.TEXT
+6. "desc" â†’ help
 7. Add name= explicitly
 8. Assign tier= based on this guide (below)
 9. Add affects=[] (can be empty for now)
@@ -412,7 +412,6 @@ ADVANCED (tier=ParameterTier.ADVANCED) - Everything else (~120+ parameters)
 - All elasticity
 - etc.
 """
-
 
 PARAMETERS: Dict[str, Parameter] = {
     "RENT": Parameter(
@@ -1198,73 +1197,8 @@ PARAMETERS: Dict[str, Parameter] = {
         affects=[]
     ),
 
-    "DOWNTURN_PROB_PER_MONTH"
-"DOWNTURN_JOIN_MULT": Parameter(
-    name="DOWNTURN_JOIN_MULT",
-    type=ParameterType.FLOAT,
-    default=0.65,
-    min=0.1,
-    max=1.5,
-    step=0.05,
-    tier=ParameterTier.ADVANCED,
-    group="economic_environment",
-    label="Economic Stress Join Multiplier",
-    help="Join rate multiplier during economic stress months. 0.65 = 35% reduction in joins during downturns. <1.0 = people delay discretionary spending.",
-    affects=[]
-),
-"DOWNTURN_CHURN_MULT": Parameter(
-    name="DOWNTURN_CHURN_MULT",
-    type=ParameterType.FLOAT,
-    default=1.0,
-    min=0.1,
-    max=3.0,
-    step=0.05,
-    tier=ParameterTier.ADVANCED,
-    group="economic_environment",
-    label="Economic Stress Churn Multiplier",
-    help="Churn rate multiplier during economic stress months. 1.50 = 50% increase in churn during downturns. >1.0 = people cut discretionary spending.",
-    affects=[]
-),
-"DOWNTURN_PROB_PER_MONTH": Parameter(
+    "DOWNTURN_PROB_PER_MONTH": Parameter(
         name="DOWNTURN_PROB_PER_MONTH",
-        type=ParameterType.FLOAT,
-        default=0.02,
-        min=0.0,
-        max=0.20,
-        step=0.01,
-        tier=ParameterTier.ADVANCED,
-        group="economic_environment",
-        label="Monthly Downturn Probability",
-        help="Probability each month of entering an economic stress period. 0.02 = 2% chance per month (~20% annual chance).",
-        affects=[]
-    ),
-"DOWNTURN_JOIN_MULT": Parameter(
-    name="DOWNTURN_JOIN_MULT",
-    type=ParameterType.FLOAT,
-    default=0.65,
-    min=0.1,
-    max=1.5,
-    step=0.05,
-    tier=ParameterTier.ADVANCED,
-    group="economic_environment",
-    label="Economic Stress Join Multiplier",
-    help="Join rate multiplier during economic stress months. 0.65 = 35% reduction in joins during downturns. <1.0 = people delay discretionary spending.",
-    affects=[]
-),
-"DOWNTURN_CHURN_MULT": Parameter(
-    name="DOWNTURN_CHURN_MULT",
-    type=ParameterType.FLOAT,
-    default=1.0,
-    min=0.1,
-    max=3.0,
-    step=0.05,
-    tier=ParameterTier.ADVANCED,
-    group="economic_environment",
-    label="Economic Stress Churn Multiplier",
-    help="Churn rate multiplier during economic stress months. 1.50 = 50% increase in churn during downturns. >1.0 = people cut discretionary spending.",
-    affects=[]
-),
-,
         type=ParameterType.FLOAT,
         default=0.01,
         min=0.0,
@@ -1277,15 +1211,33 @@ PARAMETERS: Dict[str, Parameter] = {
         affects=[]
     ),
 
-    
+    "DOWNTURN_JOIN_MULT": Parameter(
+        name="DOWNTURN_JOIN_MULT",
+        type=ParameterType.FLOAT,
+        default=0.65,
+        min=0.1,
+        max=1.5,
+        step=0.05,
+        tier=ParameterTier.ADVANCED,
+        group="economy",
+        label="Economic Stress Join Multiplier",
+        help="Join rate multiplier during economic stress months. 0.65 = 35% reduction in joins during downturns. <1.0 = people delay discretionary spending.",
+        affects=[]
+    ),
 
-    
-
-    
-
-    
-
-    
+    "DOWNTURN_CHURN_MULT": Parameter(
+        name="DOWNTURN_CHURN_MULT",
+        type=ParameterType.FLOAT,
+        default=1.0,
+        min=0.1,
+        max=3.0,
+        step=0.05,
+        tier=ParameterTier.ADVANCED,
+        group="economy",
+        label="Economic Stress Churn Multiplier",
+        help="Churn rate multiplier during economic stress months. 1.50 = 50% increase in churn during downturns. >1.0 = people cut discretionary spending.",
+        affects=[]
+    ),
 
     "SEASONALITY_JAN": Parameter(
         name="SEASONALITY_JAN",
@@ -1869,7 +1821,7 @@ PARAMETERS: Dict[str, Parameter] = {
         tier=ParameterTier.ADVANCED,
         group="classes",
         label="Total Hours per Class Series",
-        help="Total instructor hours per complete class (e.g., 6 weeks Ã— 3 hours = 18). Affects instructor costs.",
+        help="Total instructor hours per complete class (e.g., 6 weeks Ãƒâ€” 3 hours = 18). Affects instructor costs.",
         affects=[]
     ),
 
@@ -1952,7 +1904,7 @@ PARAMETERS: Dict[str, Parameter] = {
         step=0.5,
         tier=ParameterTier.ADVANCED,
         group="events",
-        label="Base Events per Month (λ)",
+        label="Base Events per Month (Î»)",
         help="Average number of monthly events before applying seasonality and random variation. Modeled using a Poisson draw.",
         affects=[]
     ),
@@ -1987,7 +1939,7 @@ PARAMETERS: Dict[str, Parameter] = {
 
     "ATTENDEES_PER_EVENT_RANGE": Parameter(
         name="ATTENDEES_PER_EVENT_RANGE",
-        type=ParameterType.JSON,
+        type=ParameterType.TEXT,
         default="[8, 10, 12]",
         tier=ParameterTier.ADVANCED,
         group="events",
@@ -1998,7 +1950,7 @@ PARAMETERS: Dict[str, Parameter] = {
 
     "EVENT_MUG_COST_RANGE": Parameter(
         name="EVENT_MUG_COST_RANGE",
-        type=ParameterType.JSON,
+        type=ParameterType.TEXT,
         default="[4.5, 7.5]",
         tier=ParameterTier.ADVANCED,
         group="events",
@@ -2134,7 +2086,7 @@ PARAMETERS: Dict[str, Parameter] = {
         tier=ParameterTier.ADVANCED,
         group="fixed_costs",
         label="Winter Monthly Heating ($)",
-        help="Heating costs during cold months (Oct–Mar). Higher for pottery studios due to large spaces and kiln heat loss.",
+        help="Heating costs during cold months (Octâ€“Mar). Higher for pottery studios due to large spaces and kiln heat loss.",
         affects=[]
     ),
 
@@ -2148,7 +2100,7 @@ PARAMETERS: Dict[str, Parameter] = {
         tier=ParameterTier.ADVANCED,
         group="fixed_costs",
         label="Summer Monthly Heating ($)",
-        help="Minimal heating costs during warm months (Apr–Sep). May be just hot water heater and minimal space heating.",
+        help="Minimal heating costs during warm months (Aprâ€“Sep). May be just hot water heater and minimal space heating.",
         affects=[]
     ),
 
@@ -2577,7 +2529,7 @@ PARAMETERS: Dict[str, Parameter] = {
         tier=ParameterTier.ESSENTIAL,
         group="financing",
         label="SBA 504 Term (years)",
-        help="Repayment period for 504 loan. Longer terms available for real estate (20 years) vs equipment (10–15 years).",
+        help="Repayment period for 504 loan. Longer terms available for real estate (20 years) vs equipment (10â€“15 years).",
         affects=[]
     ),
 
@@ -2703,7 +2655,7 @@ PARAMETERS: Dict[str, Parameter] = {
         tier=ParameterTier.ADVANCED,
         group="financing",
         label="7(a) Upfront Fee %",
-        help="SBA guarantee fee as a percentage of 7(a) loan amount. Typically 2–3.5% depending on loan size.",
+        help="SBA guarantee fee as a percentage of 7(a) loan amount. Typically 2â€“3.5% depending on loan size.",
         affects=[]
     ),
 
@@ -2878,3 +2830,188 @@ PARAMETERS: Dict[str, Parameter] = {
         affects=[]
     ),
 }
+
+
+# =============================================================================
+# HELPER FUNCTIONS
+# =============================================================================
+
+def get_parameter(name: str) -> Parameter:
+    """
+    Retrieve a parameter by name.
+    
+    Args:
+        name: Parameter name (e.g., "RENT", "PRICE")
+        
+    Returns:
+        Parameter object
+        
+    Raises:
+        KeyError: If parameter name doesn't exist
+        
+    Example:
+        >>> rent_param = get_parameter("RENT")
+        >>> print(rent_param.default)
+        3500
+    """
+    if name not in PARAMETERS:
+        raise KeyError(f"Parameter '{name}' not found. Available parameters: {list(PARAMETERS.keys())}")
+    return PARAMETERS[name]
+
+
+def get_defaults() -> Dict[str, Any]:
+    """
+    Get all parameter default values as a dictionary.
+    
+    Returns:
+        Dictionary mapping parameter names to their default values
+        
+    Example:
+        >>> defaults = get_defaults()
+        >>> print(defaults["RENT"])
+        3500
+    """
+    return {name: param.default for name, param in PARAMETERS.items()}
+
+
+def get_by_tier(tier: ParameterTier) -> Dict[str, Parameter]:
+    """
+    Get all parameters in a specific tier.
+    
+    Args:
+        tier: ParameterTier.ESSENTIAL, IMPORTANT, or ADVANCED
+        
+    Returns:
+        Dictionary of parameters in that tier
+        
+    Example:
+        >>> essential = get_by_tier(ParameterTier.ESSENTIAL)
+        >>> print(len(essential))  # Should be 9
+        9
+    """
+    return {name: param for name, param in PARAMETERS.items() if param.tier == tier}
+
+
+def get_essential_params() -> Dict[str, Parameter]:
+    """
+    Get all essential-tier parameters (always visible in UI).
+    
+    Convenience wrapper around get_by_tier(ParameterTier.ESSENTIAL).
+    
+    Returns:
+        Dictionary of essential parameters
+        
+    Example:
+        >>> essential = get_essential_params()
+        >>> print(list(essential.keys()))
+        ['RENT', 'MAX_MEMBERS', 'PRICE', ...]
+    """
+    return get_by_tier(ParameterTier.ESSENTIAL)
+
+
+def get_by_group(group: str) -> Dict[str, Parameter]:
+    """
+    Get all parameters in a specific group.
+    
+    Args:
+        group: Group name (e.g., "business_fundamentals", "financing")
+        
+    Returns:
+        Dictionary of parameters in that group
+        
+    Example:
+        >>> financing_params = get_by_group("financing")
+        >>> print(len(financing_params))
+        25
+    """
+    return {name: param for name, param in PARAMETERS.items() if param.group == group}
+
+
+def validate_params(param_dict: Dict[str, Any]) -> tuple[bool, Dict[str, str]]:
+    """
+    Validate a dictionary of parameter values against schema constraints.
+    
+    Args:
+        param_dict: Dictionary mapping parameter names to values
+        
+    Returns:
+        Tuple of (is_valid, errors_dict)
+        - is_valid: True if all validations pass
+        - errors_dict: Dictionary mapping parameter names to error messages
+        
+    Example:
+        >>> values = {"RENT": 3500, "MAX_MEMBERS": 77, "PRICE": -10}
+        >>> valid, errors = validate_params(values)
+        >>> print(valid)
+        False
+        >>> print(errors["PRICE"])
+        "Monthly Membership Price must be >= 50"
+    """
+    errors = {}
+    
+    for name, value in param_dict.items():
+        if name not in PARAMETERS:
+            errors[name] = f"Unknown parameter: {name}"
+            continue
+            
+        param = PARAMETERS[name]
+        is_valid, error_msg = param.validate(value)
+        if not is_valid:
+            errors[name] = error_msg
+    
+    return len(errors) == 0, errors
+
+
+# =============================================================================
+# VERIFICATION TESTS
+# =============================================================================
+
+if __name__ == "__main__":
+    print("Testing helper functions...")
+    
+    # Test 1: get_parameter
+    rent = get_parameter("RENT")
+    assert rent.default == 3500, "RENT default should be 3500"
+    print("✓ Test 1: get_parameter()")
+    
+    # Test 2: get_defaults
+    defaults = get_defaults()
+    assert "RENT" in defaults, "RENT should be in defaults"
+    assert defaults["RENT"] == 3500, "RENT default should be 3500"
+    print("✓ Test 2: get_defaults()")
+    
+    # Test 3: get_by_tier
+    essential = get_by_tier(ParameterTier.ESSENTIAL)
+    assert len(essential) == 9, f"Should have 9 essential params, found {len(essential)}"
+    print("✓ Test 3: get_by_tier()")
+    
+    # Test 4: get_essential_params
+    essential2 = get_essential_params()
+    assert len(essential2) == 9, "get_essential_params should return 9 params"
+    print("✓ Test 4: get_essential_params()")
+    
+    # Test 5: get_by_group
+    financing = get_by_group("financing")
+    assert len(financing) > 0, "Should have financing parameters"
+    print(f"✓ Test 5: get_by_group() - found {len(financing)} financing params")
+    
+    # Test 6: validate_params
+    valid_params = {"RENT": 3500, "MAX_MEMBERS": 77}
+    is_valid, errors = validate_params(valid_params)
+    assert is_valid, f"Valid params should pass validation: {errors}"
+    print("✓ Test 6a: validate_params() - valid input")
+    
+    invalid_params = {"RENT": -1000, "MAX_MEMBERS": 500}
+    is_valid, errors = validate_params(invalid_params)
+    assert not is_valid, "Invalid params should fail validation"
+    assert "RENT" in errors, "RENT should have validation error"
+    print("✓ Test 6b: validate_params() - invalid input")
+    
+    print("\n" + "=" * 60)
+    print("✅ ALL TESTS PASSED!")
+    print("=" * 60)
+    print(f"\nParameter schema has {len(PARAMETERS)} parameters:")
+    print(f"  - Essential: {len(get_by_tier(ParameterTier.ESSENTIAL))}")
+    print(f"  - Important: {len(get_by_tier(ParameterTier.IMPORTANT))}")
+    print(f"  - Advanced: {len(get_by_tier(ParameterTier.ADVANCED))}")
+    print(f"\nPhase 1e COMPLETE - Ready for Phase 2!")
