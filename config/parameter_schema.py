@@ -413,8 +413,6 @@ ADVANCED (tier=ParameterTier.ADVANCED) - Everything else (~120+ parameters)
 - etc.
 """
 
-from typing import Dict
-from config.parameter_schema import Parameter, ParameterType, ParameterTier
 
 PARAMETERS: Dict[str, Parameter] = {
     "RENT": Parameter(
@@ -1200,8 +1198,73 @@ PARAMETERS: Dict[str, Parameter] = {
         affects=[]
     ),
 
-    "DOWNTURN_PROB_PER_MONTH": Parameter(
+    "DOWNTURN_PROB_PER_MONTH"
+"DOWNTURN_JOIN_MULT": Parameter(
+    name="DOWNTURN_JOIN_MULT",
+    type=ParameterType.FLOAT,
+    default=0.65,
+    min=0.1,
+    max=1.5,
+    step=0.05,
+    tier=ParameterTier.ADVANCED,
+    group="economic_environment",
+    label="Economic Stress Join Multiplier",
+    help="Join rate multiplier during economic stress months. 0.65 = 35% reduction in joins during downturns. <1.0 = people delay discretionary spending.",
+    affects=[]
+),
+"DOWNTURN_CHURN_MULT": Parameter(
+    name="DOWNTURN_CHURN_MULT",
+    type=ParameterType.FLOAT,
+    default=1.0,
+    min=0.1,
+    max=3.0,
+    step=0.05,
+    tier=ParameterTier.ADVANCED,
+    group="economic_environment",
+    label="Economic Stress Churn Multiplier",
+    help="Churn rate multiplier during economic stress months. 1.50 = 50% increase in churn during downturns. >1.0 = people cut discretionary spending.",
+    affects=[]
+),
+"DOWNTURN_PROB_PER_MONTH": Parameter(
         name="DOWNTURN_PROB_PER_MONTH",
+        type=ParameterType.FLOAT,
+        default=0.02,
+        min=0.0,
+        max=0.20,
+        step=0.01,
+        tier=ParameterTier.ADVANCED,
+        group="economic_environment",
+        label="Monthly Downturn Probability",
+        help="Probability each month of entering an economic stress period. 0.02 = 2% chance per month (~20% annual chance).",
+        affects=[]
+    ),
+"DOWNTURN_JOIN_MULT": Parameter(
+    name="DOWNTURN_JOIN_MULT",
+    type=ParameterType.FLOAT,
+    default=0.65,
+    min=0.1,
+    max=1.5,
+    step=0.05,
+    tier=ParameterTier.ADVANCED,
+    group="economic_environment",
+    label="Economic Stress Join Multiplier",
+    help="Join rate multiplier during economic stress months. 0.65 = 35% reduction in joins during downturns. <1.0 = people delay discretionary spending.",
+    affects=[]
+),
+"DOWNTURN_CHURN_MULT": Parameter(
+    name="DOWNTURN_CHURN_MULT",
+    type=ParameterType.FLOAT,
+    default=1.0,
+    min=0.1,
+    max=3.0,
+    step=0.05,
+    tier=ParameterTier.ADVANCED,
+    group="economic_environment",
+    label="Economic Stress Churn Multiplier",
+    help="Churn rate multiplier during economic stress months. 1.50 = 50% increase in churn during downturns. >1.0 = people cut discretionary spending.",
+    affects=[]
+),
+,
         type=ParameterType.FLOAT,
         default=0.01,
         min=0.0,
@@ -1214,75 +1277,15 @@ PARAMETERS: Dict[str, Parameter] = {
         affects=[]
     ),
 
-    "DOWNTURN_SEVERITY": Parameter(
-        name="DOWNTURN_SEVERITY",
-        type=ParameterType.FLOAT,
-        default=0.30,
-        min=0.0,
-        max=1.0,
-        step=0.05,
-        tier=ParameterTier.ADVANCED,
-        group="economy",
-        label="Downturn Severity Level",
-        help="Fractional reduction in join and referral rates during downturns. 0.30 = 30% drop in demand during downturn months.",
-        affects=[]
-    ),
+    
 
-    "DOWNTURN_DURATION_MEAN": Parameter(
-        name="DOWNTURN_DURATION_MEAN",
-        type=ParameterType.FLOAT,
-        default=4.0,
-        min=1.0,
-        max=24.0,
-        step=0.5,
-        tier=ParameterTier.ADVANCED,
-        group="economy",
-        label="Downturn Duration Mean (months)",
-        help="Average duration of downturn events in months. Affects how long economic shocks last in the simulation.",
-        affects=[]
-    ),
+    
 
-    "DOWNTURN_DURATION_SD": Parameter(
-        name="DOWNTURN_DURATION_SD",
-        type=ParameterType.FLOAT,
-        default=1.5,
-        min=0.0,
-        max=12.0,
-        step=0.5,
-        tier=ParameterTier.ADVANCED,
-        group="economy",
-        label="Downturn Duration Variability",
-        help="Standard deviation of downturn durations. Higher values create more unpredictable economic cycles.",
-        affects=[]
-    ),
+    
 
-    "RECOVERY_BOOST": Parameter(
-        name="RECOVERY_BOOST",
-        type=ParameterType.FLOAT,
-        default=0.10,
-        min=0.0,
-        max=0.5,
-        step=0.01,
-        tier=ParameterTier.ADVANCED,
-        group="economy",
-        label="Post-Downturn Recovery Boost",
-        help="Increase in join probability for a few months after downturns. Captures pent-up demand and rebound effects.",
-        affects=[]
-    ),
+    
 
-    "RECOVERY_MONTHS": Parameter(
-        name="RECOVERY_MONTHS",
-        type=ParameterType.INT,
-        default=2,
-        min=0,
-        max=12,
-        step=1,
-        tier=ParameterTier.ADVANCED,
-        group="economy",
-        label="Recovery Boost Duration",
-        help="How many months the recovery boost lasts after a downturn.",
-        affects=[]
-    ),
+    
 
     "SEASONALITY_JAN": Parameter(
         name="SEASONALITY_JAN",
@@ -2678,7 +2681,7 @@ PARAMETERS: Dict[str, Parameter] = {
 
     "RESERVE_FLOOR": Parameter(
         name="RESERVE_FLOOR",
-        type=ParameterTier.FLOAT,
+        type=ParameterType.FLOAT,
         default=5000.0,
         min=0.0,
         max=50000.0,
